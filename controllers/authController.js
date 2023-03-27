@@ -15,6 +15,7 @@ export const registerController = async (req, res) => {
       country,
       state,
       address,
+      role,
     } = req.body;
 
     if (!fname) {
@@ -47,6 +48,9 @@ export const registerController = async (req, res) => {
     if (!address) {
       return res.send({ error: "Address is Required" });
     }
+    if (!role) {
+      return res.send({ error: "Role is Required" });
+    }
 
     //Check User
     const existingUser = await userModel.findOne({ email });
@@ -72,6 +76,7 @@ export const registerController = async (req, res) => {
       country,
       state,
       address,
+      role,
     }).save();
 
     res.status(201).send({
@@ -142,4 +147,10 @@ export const loginController = async (req, res) => {
       error,
     });
   }
+};
+
+// Test Controller
+
+export const testController = (req, res) => {
+  res.send("Protected Route");
 };
