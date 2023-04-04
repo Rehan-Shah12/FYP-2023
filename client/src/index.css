@@ -140,3 +140,14 @@
   color: white;
   font-weight: bold;
 }
+
+/*/////////////////////////////////////////////////////////////////////     Search Bar*/
+
+.btnforauth:hover {
+  background-color: #e150f9;
+  color: white;
+  font-weight: bold;
+}
+.btnforauth {
+  border-radius: 30px;
+}
