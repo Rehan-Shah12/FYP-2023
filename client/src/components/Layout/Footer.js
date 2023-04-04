@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -18,30 +19,50 @@ const Footer = () => {
               <strong>Email:</strong> example@gmail.com
             </p>
           </div>
-          <div className="col">
-            <span className="fs-5 fw-bolder ">Information</span>
-            <p>About us</p>
-            <p>FAQ</p>
-            <p>Contact us</p>
+          <div className="col mt-2">
+            <span className="fs-3 fw-bolder d-flex align-items-center justify-content-center  ">
+              Information
+            </span>
+            <span className="footer ">
+              <Link to="/about" className="nolinkcolor pb-4 ">
+                About us
+              </Link>
+              <Link to="/about" className="nolinkcolor pb-4 ">
+                FAQ
+              </Link>
+              <Link to="/about" className="nolinkcolor pb-4 ">
+                Contact us
+              </Link>
+            </span>
           </div>
-          <div className="col ">
-            <span className="fs-5 fw-bolder ">Account</span>
-            <p>My Profile</p>
-            <p>Order History</p>
-            <p>Wishlist</p>
+          <div className="col mt-2">
+            <span className="fs-3 fw-bolder d-flex align-items-center justify-content-center ">
+              Account
+            </span>
+            <span className="footer">
+              <Link to="/myprofile" className="nolinkcolor pb-4 ">
+                My Profile
+              </Link>
+              <Link to="/orderhistory" className="nolinkcolor pb-4 ">
+                Order History
+              </Link>
+              <Link to="/wishlist" className="nolinkcolor pb-4 ">
+                Wishlist
+              </Link>
+            </span>
           </div>
-          <div className="col ">
-            <span className="fs-5 fw-bolder ">Newsletter</span>
-            <p>
+          <div className="col mt-2">
+            <span className="fs-3 fw-bolder ">Newsletter</span>
+            <p className="pt-4">
               Get instant updates on your e-mail related to our new products
             </p>
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
                 @
               </span>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Email"
                 aria-label="Email"
                 aria-describedby="basic-addon1"

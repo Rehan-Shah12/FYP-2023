@@ -7,12 +7,21 @@
 }
 /* font-family: 'Montserrat', sans-serif; */
 
+/*/////////////////////////////////////////////////////////////////////     BASIC*/
+.mx-6 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+/*/////////////////////////////////////////////////////////////////////     NAVBAR*/
+
 .navbar-nav {
   flex-direction: row;
 }
 .navbar-item {
   padding-left: 6%;
 }
+
 .container-fluid {
   --bs-gutter-x: 5.5rem;
 }
@@ -20,5 +29,114 @@
   justify-content: space-between;
 }
 .nav-link {
-  padding-left: 40px;
+  --bs-nav-link-padding-x: 15px;
+  font-weight: bold;
+}
+.navbar-nav .nav-link.active {
+  color: #f477c2;
+  border-bottom: 4px solid #f477c2;
+}
+.category {
+  margin-bottom: 0%;
+}
+
+/*/////////////////////////////////////////////////////////////////////     FOOTER*/
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+}
+.footer a:hover {
+  color: #f477c2;
+  font-weight: bold;
+}
+.nolinkcolor {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+/*/////////////////////////////////////////////////////////////////////     PAGE NOT FOUND*/
+
+.pnf {
+  display: flex;
+  min-height: 65vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pnf-title {
+  font-size: 100px;
+  font-weight: 700;
+}
+
+.pnf-heading {
+  font-weight: normal;
+}
+
+.pnf-btn {
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: 10px;
+}
+.pnf-btn:hover {
+  background-color: #f477c2;
+  color: white;
+  border: none;
+}
+
+/*/////////////////////////////////////////////////////////////////////     REGISTER*/
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+.input-field {
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  width: 20rem;
+}
+.opacity {
+  opacity: 0.8;
+}
+.submit {
+  background-color: #e150f9;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 30px;
+  margin-top: 2rem;
+}
+.btn:hover {
+  background-color: #ab0ac8;
+  color: white;
+  font-weight: bold;
+}
+
+/*/////////////////////////////////////////////////////////////////////     LOGIN*/
+.vertical-flex {
+  flex-direction: column;
+}
+.login-input-field {
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  width: 27rem;
+}
+.gotoregister {
+  background-color: #878787;
+  color: white;
+  border-radius: 20px;
+  padding: 11px 23px;
+}
+.gotoregister:hover {
+  background-color: #434242;
+  color: white;
+  font-weight: bold;
 }

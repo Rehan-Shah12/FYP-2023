@@ -15,49 +15,49 @@ export const registerController = async (req, res) => {
       country,
       state,
       address,
-      role,
+      // role,
     } = req.body;
 
     if (!fname) {
-      return res.send({ error: "First Name is Required" });
+      return res.send({ message: "First Name is Required" });
     }
     if (!lname) {
-      return res.send({ error: "Last Name is Required" });
+      return res.send({ message: "Last Name is Required" });
     }
     if (!email) {
-      return res.send({ error: "Email is Required" });
+      return res.send({ message: "Email is Required" });
     }
     if (!password) {
-      return res.send({ error: "Password is Required" });
+      return res.send({ message: "Password is Required" });
     }
     if (!phone) {
-      return res.send({ error: "Phone is Required" });
+      return res.send({ message: "Phone is Required" });
     }
     if (!city) {
-      return res.send({ error: "City is Required" });
+      return res.send({ message: "City is Required" });
     }
     if (!postcode) {
-      return res.send({ error: "Postcode is Required" });
+      return res.send({ message: "Postcode is Required" });
     }
     if (!country) {
-      return res.send({ error: "Country is Required" });
+      return res.send({ message: "Country is Required" });
     }
     if (!state) {
-      return res.send({ error: "State is Required" });
+      return res.send({ message: "State is Required" });
     }
     if (!address) {
-      return res.send({ error: "Address is Required" });
+      return res.send({ message: "Address is Required" });
     }
-    if (!role) {
-      return res.send({ error: "Role is Required" });
-    }
+    // if (!role) {
+    //   return res.send({ message: "Role is Required" });
+    // }
 
     //Check User
     const existingUser = await userModel.findOne({ email });
     //Existing User
     if (existingUser) {
       return res.status(200).send({
-        success: true,
+        success: false,
         message: "Already Registered Please Login",
       });
     }
@@ -76,7 +76,7 @@ export const registerController = async (req, res) => {
       country,
       state,
       address,
-      role,
+      // role,
     }).save();
 
     res.status(201).send({
