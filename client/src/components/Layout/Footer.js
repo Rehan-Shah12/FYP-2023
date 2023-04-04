@@ -57,7 +57,7 @@ const Footer = () => {
               Get instant updates on your e-mail related to our new products
             </p>
             <div className="input-group mb-3">
-              <span class="input-group-text" id="basic-addon1">
+              <span className="input-group-text" id="basic-addon1">
                 @
               </span>
               <input

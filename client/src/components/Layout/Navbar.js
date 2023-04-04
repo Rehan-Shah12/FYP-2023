@@ -7,8 +7,13 @@ const Navbar = () => {
     <>
       <div className="container-fluid border-bottom d-flex align-items-center flex-wrap">
         <div className="d-flex align-items-center justify-content-center">
-          <span role="img">
-            <p className="category fw-bold fs-5">🛒 Category</p>
+          <span>
+            <p className="category fw-bold fs-5">
+              <span role="img" aria-label="Category">
+                🛒
+              </span>
+              Category
+            </p>
           </span>
         </div>
         <div>
