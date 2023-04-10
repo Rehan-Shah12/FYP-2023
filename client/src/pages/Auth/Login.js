@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// eslint-disable-next-line
+import { Link, useLoaderData } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
   const { auth, setAuth } = useAuth("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate("/");
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
@@ -75,6 +77,20 @@ const Login = () => {
                 placeholder="Enter your Password"
                 required
               />
+              <Link
+                to={"/forgot-password"}
+                className="nav-link"
+                style={{ marginTop: "5px" }}
+              >
+                <sub
+                  style={{
+                    fontWeight: "light",
+                    opacity: "80%",
+                  }}
+                >
+                  Forgot Password?
+                </sub>
+              </Link>
             </div>
           </div>
           <div className="d-flex submit-button justify-content-center align-items-center vertical-flex">

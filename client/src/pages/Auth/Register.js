@@ -14,6 +14,7 @@ const Register = () => {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
   const [postcode, setPostal] = useState("");
 
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Register = () => {
         state,
         address,
         postcode,
+        answer,
       });
       console.log(res);
       if (res && res.data.success) {
@@ -202,6 +204,22 @@ const Register = () => {
                 value={postcode}
                 onChange={(e) => setPostal(e.target.value)}
                 placeholder="Enter your Postal Code"
+                required
+              />
+            </div>
+          </div>
+          <div className="d-flex">
+            <div className="mb-3 mx-6 ">
+              <label htmlFor="answer" className="form-lable fw-bold opacity">
+                Answer*
+              </label>
+              <input
+                type="text"
+                className="form-control input-field"
+                id="answer"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="What is your Favourite Food?"
                 required
               />
             </div>

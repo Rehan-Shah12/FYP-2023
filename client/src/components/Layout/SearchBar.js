@@ -46,6 +46,16 @@ const SearchBar = () => {
                   </li>
                   <li className="nav-link">
                     <Link
+                      to={`/dashboard/${
+                        auth.user.role === 1 ? "admin" : "user"
+                      }`}
+                      className="btn btnforauth "
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li className="nav-link">
+                    <Link
                       onClick={handleLogout}
                       to="/login"
                       className="btn btnforauth "

@@ -3,6 +3,7 @@ import Layout from "../components/Layout/Layout";
 import { useAuth } from "../context/auth";
 
 const HomePage = () => {
+  // eslint-disable-next-line
   const { auth, setAuth } = useAuth();
   return (
     <Layout>
