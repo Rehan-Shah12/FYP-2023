@@ -13,7 +13,10 @@ const AdminDashboard = () => {
           </div>
           <div className="col-md-9">
             <div className="card">Admin Dashboard</div>
-            {/* <div className="card">{console.log(auth?.user?.name)}</div> */}
+            <div className="card">{auth.user.fname}</div>
+            <div className="card">{auth.user.lname}</div>
+            <div className="card">{auth.user.phone}</div>
+            <div className="card">{auth.user.email}</div>
           </div>
         </div>
       </div>

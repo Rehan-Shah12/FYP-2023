@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
 const AdminMenu = () => {
+  const { auth } = useAuth();
   return (
     <div className="list-group">
       <div className="d-flex justify-content-center align-items-center flex-column mt-5 mb-5">
@@ -11,7 +13,7 @@ const AdminMenu = () => {
           className="rounded-circle profilepic "
           style={{ height: "200px", width: "200px" }}
         />
-        <h1>Admin</h1>
+        <h1>{auth.user.fname}</h1>
       </div>
       <div className="text-center rounded">
         {" "}
