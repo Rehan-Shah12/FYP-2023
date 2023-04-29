@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import SearchInput from "../Form/SearchInput";
 // import profilepic from "../../../public/images/profilepic.jpg";
 
 const SearchBar = () => {
@@ -17,7 +18,9 @@ const SearchBar = () => {
   return (
     <div className="border-bottom d-flex justify-content-between px-5 fs-5 align-items-center pt-2 pb-2">
       <div>Logo</div>
-      <div>SearchBar</div>
+      <div>
+        <SearchInput />
+      </div>
       <div className="profile-space">
         {!auth.user ? (
           <>

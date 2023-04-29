@@ -27,7 +27,7 @@ router.put(
 );
 
 // GetAll Categories
-router.get("/all-category", categoryController);
+router.get("/get-category", categoryController);
 
 // Get Single Category
 router.get("/single-category/:slug", singleCategoryController);

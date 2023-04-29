@@ -17,12 +17,24 @@ import Feedback from "./pages/Admin/Feedback.js";
 import AdminProfile from "./pages/Admin/AdminProfile.js";
 import OrderHistory from "./pages/User/OrderHistory.js";
 import Profile from "./pages/User/Profile.js";
+import Products from "./pages/Admin/Product.js";
+import UpdateProduct from "./pages/Admin/UpdateProduct.js";
+import ChoiceMall from "./pages/ChoiceMall.js";
+import Search from "./pages/Search.js";
+import ProductDetails from "./pages/ProductDetails.js";
+import Categories from "./pages/Categories.js";
+import CategoryProduct from "./pages/CategoryProduct.js";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/choice-mall" element={<ChoiceMall />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
           <Route path="user/order-history" element={<OrderHistory />} />
@@ -32,6 +44,8 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/create-category" element={<CreateCategory />} />
           <Route path="admin/create-product" element={<CreateProduct />} />
+          <Route path="admin/product/:slug" element={<UpdateProduct />} />
+          <Route path="admin/products" element={<Products />} />
           <Route path="admin/feedback" element={<Feedback />} />
           <Route path="admin/profile" element={<AdminProfile />} />
         </Route>

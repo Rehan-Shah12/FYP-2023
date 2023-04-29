@@ -40,6 +40,14 @@
   margin-bottom: 0%;
 }
 
+.category.btn:hover {
+  background-color: #c35e9a;
+  font-weight: bold;
+}
+.category.btn:active {
+  border-color: white;
+}
+
 /*/////////////////////////////////////////////////////////////////////     FOOTER*/
 
 .footer {
@@ -169,4 +177,66 @@
   width: 40px;
   height: 40px;
   border: 1px solid #434242;
+}
+
+.product-link {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+/* ChoiceMall*/
+.home-page {
+  display: flex;
+  flex-wrap: wrap;
+}
+.home-page .card {
+  width: 19rem;
+}
+.home-page .card-name-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.home-page .card-price {
+  font-weight: bold;
+}
+
+.home-page .card img:hover {
+  transform: scale(0.9);
+}
+
+.home-page .card-img-top {
+  height: 250px !important;
+  object-fit: contain;
+}
+
+/* Filters */
+.ant-checkbox-wrapper:first-of-type {
+  margin-left: 8px;
+}
+
+.ant-checkbox-wrapper {
+  margin: 2px;
+}
+.ant-radio-wrapper {
+  margin-bottom: 5px !important;
+  margin-left: 10px;
+}
+
+.filters button {
+  background-color: #e150f9;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  margin-top: 20px;
+  border-radius: 30px;
+}
+
+.loadmore {
+  color: green;
+  font-weight: bold;
+  font-size: 15px !important;
+  border: 2px solid green;
+  border-radius: 15px;
 }
