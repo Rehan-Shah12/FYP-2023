@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import SearchInput from "../Form/SearchInput";
+import { BsCart4 } from "react-icons/bs";
+import { useCart } from "../../context/cart";
+import { Badge } from "antd";
+import { useNavigate } from "react-router-dom";
+
 // import profilepic from "../../../public/images/profilepic.jpg";
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+
   const { auth, setAuth } = useAuth();
+  const [cart] = useCart();
   const [openDropDownProfile, setOpenDropDownProfile] = useState(false);
   const handleLogout = () => {
     setAuth({
@@ -30,9 +38,20 @@ const SearchBar = () => {
             <Link to="/login" className="btn btnforauth">
               Log In
             </Link>
+            <Link to={"/cart"} style={{ marginLeft: "25px" }}>
+              <Badge count={cart.length}>
+                <BsCart4 size={25} />
+              </Badge>
+            </Link>
           </>
         ) : (
-          <>
+          <div className="d-flex">
+            <Link to={"/cart"} style={{ marginRight: "25px" }}>
+              <Badge count={cart.length}>
+                <BsCart4 size={25} />
+              </Badge>
+            </Link>
+
             <div>
               <img
                 onClick={() => setOpenDropDownProfile(!openDropDownProfile)}
@@ -43,7 +62,12 @@ const SearchBar = () => {
               {openDropDownProfile && (
                 <ul className="profile-dropdown">
                   <li className="nav-link">
-                    <Link to="/profile" className="btn btnforauth ">
+                    <Link
+                      to={`/dashboard/${
+                        auth.user.role === 1 ? "admin" : "user"
+                      }/profile`}
+                      className="btn btnforauth "
+                    >
                       Profile
                     </Link>
                   </li>
@@ -69,7 +93,7 @@ const SearchBar = () => {
                 </ul>
               )}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import { useSearch } from "../context/search";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { BsFillCartFill } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 const Search = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // const { scrape } = location.state;
 
   const [values, setValues] = useSearch();
+
+  const [scrapeValues, setScrapeValues] = useState([]);
+  console.log(scrapeValues);
+  useEffect(() => {
+    if (location.state) {
+      setScrapeValues(location.state.data);
+    }
+  }, [location.state]);
+
   return (
     <Layout title={"Search results"}>
       <div
@@ -62,6 +75,56 @@ const Search = () => {
                       }}
                     >
                       CHOICE
+                    </div>
+                    <div>
+                      <MdOutlineFavoriteBorder
+                        size={25}
+                        style={{ marginRight: "10px" }}
+                      />
+
+                      {/* //     onClick={() => {
+                        //       setCart([...cart, p]);
+                        //       localStorage.setItem(
+                        //         "cart",
+                        //         JSON.stringify([...cart, p])
+                        //       );
+                        //       toast.success("Item Added to cart");
+                        //     }} */}
+
+                      <BsFillCartFill size={25} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {scrapeValues.map((p) => (
+              <div className="card m-2" style={{ width: "18rem" }}>
+                <img src={p.image} className="card-img-top" alt={p.name} />
+                <div className="card-body">
+                  <div className="card-name-price">
+                    <h5 className="card-title text-start">
+                      {p.name.substring(0, 30)}...
+                    </h5>
+                    <h5 className="card-title card-price">
+                      {p.price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    </h5>
+                  </div>
+
+                  <div className="card-name-price">
+                    <div
+                      style={{
+                        fontWeight: "bold",
+                        backgroundColor: "#e150f9",
+                        color: "white",
+                        textAlign: "center",
+                        padding: "3px 6px ",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {p.site}
                     </div>
                     <div>
                       <MdOutlineFavoriteBorder

@@ -32,7 +32,7 @@ const Navbar = () => {
                   Category
                 </p>
               </Link>
-              {console.log("Hello", categories)}
+              {/* {console.log("Hello", categories)} */}
 
               <ul className="dropdown-menu">
                 <li>

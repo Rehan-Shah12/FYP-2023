@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useSearch } from "../../context/search";
 import axios from "axios";
@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
   const [values, setValues] = useSearch();
+  // const [scrapeValues, setScrapeValues] = useState([]);
+  // console.log(scrapeValues);
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,8 +16,16 @@ const SearchInput = () => {
       const { data } = await axios.get(
         `/api/v1/product/search/${values.keyword}`
       );
+
       setValues({ ...values, results: data });
       navigate("/search");
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      const { data } = await axios.get(`/api/v1/scraper/search/`);
+      // setScrapeValues(data);
+      navigate("/search", { state: { data } });
     } catch (error) {
       console.log(error);
     }

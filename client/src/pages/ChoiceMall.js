@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
-// import { useCart } from "../context/cart";
+import { useCart } from "../context/cart";
 import axios from "axios";
 import Layout from "./../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { BsFillCartFill } from "react-icons/bs";
+import toast from "react-hot-toast";
 
 const ChoiceMall = () => {
   const navigate = useNavigate();
-  //   const [cart, setCart] = useCart();
+  const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -192,16 +193,17 @@ const ChoiceMall = () => {
                           style={{ marginRight: "10px" }}
                         />
 
-                        {/* //     onClick={() => {
-                        //       setCart([...cart, p]);
-                        //       localStorage.setItem(
-                        //         "cart",
-                        //         JSON.stringify([...cart, p])
-                        //       );
-                        //       toast.success("Item Added to cart");
-                        //     }} */}
-
-                        <BsFillCartFill size={25} />
+                        <BsFillCartFill
+                          size={25}
+                          onClick={() => {
+                            setCart([...cart, p]);
+                            localStorage.setItem(
+                              "cart",
+                              JSON.stringify([...cart, p])
+                            );
+                            toast.success("Item added to Cart");
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
