@@ -8,10 +8,25 @@ const SearchInput = () => {
   const [values, setValues] = useSearch();
   // const [scrapeValues, setScrapeValues] = useState([]);
   // console.log(scrapeValues);
+  // const [searching, setSearching] = useState(false); // New state variable to track search operation
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      // setSearching(true); // Start search operation
+      const key = values.keyword;
+      // console.log(key);
+      const { data } = await axios.post("/api/v1/scraper/scrape-search/", {
+        query: key,
+      });
+      // setSearching(false); // Stop search operation
+
+      navigate("/search", { state: { data } });
+    } catch (error) {
+      console.log(error);
+    }
     try {
       const { data } = await axios.get(
         `/api/v1/product/search/${values.keyword}`

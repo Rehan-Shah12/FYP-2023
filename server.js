@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import scraperRoutes from "./routes/scraperRoute.js";
+import scraper from "./scraper.js";
 import cors from "cors";
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/scraper", scraperRoutes);
+app.use("/api/v1/scraper", scraper);
 
 app.get("/", (req, res) => {
   res.send("<h1>Rehan Shah</h1>");

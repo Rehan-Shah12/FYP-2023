@@ -4,41 +4,47 @@ import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs";
 
-const app = express();
-const port = 7000;
+const app = express.Router();
 
 app.use(bodyParser.json());
 
-app.post("/search", async (req, res) => {
+app.post("/scrape-search", async (req, res) => {
   const query = req.body.query;
-  const [eloProducts, darazProducts, ishoppingProducts] = await Promise.all([
-    elo(query),
-    daraz(query),
-    ishopping(query),
-  ]);
-  const searchResults = [
-    ...darazProducts,
-    ...eloProducts,
-    ...ishoppingProducts,
-  ];
-  const jsonData = JSON.stringify(searchResults);
-  fs.writeFileSync("search_data.json", jsonData);
-  res.json(searchResults);
-});
+  console.log(query);
 
-app.listen(port, () => {
-  console.log(`Server sun raha hai on port ${port}`);
-});
-
-///////////////////////////////////////////////////////////////////////////////////
-
-async function elo(query) {
   const browser = await puppeteer.launch({
     headless: false,
     ignoreDefaultArgs: ["--disable-extentions"],
     args: ["--no-sandbox"],
   });
 
+  const [eloProducts, darazProducts, ishoppingProducts] = await Promise.all([
+    elo(query, browser),
+    daraz(query, browser),
+    ishopping(query, browser),
+  ]);
+
+  await browser.close();
+
+  const searchResults = [
+    ...darazProducts,
+    ...eloProducts,
+    ...ishoppingProducts,
+  ];
+
+  const jsonData = JSON.stringify(searchResults);
+  fs.writeFileSync("search_data.json", jsonData);
+  res.json(searchResults);
+});
+
+// app.listen(port, () => {
+//   console.log(`Server sun raha hai on port ${port}`);
+// });
+export default app;
+
+///////////////////////////////////////////////////////////////////////////////////
+
+async function elo(query, browser) {
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(0);
 
@@ -92,20 +98,14 @@ async function elo(query) {
     products.push({ name, price, orignalprice, image, desc, link, site });
   });
 
-  await browser.close();
+  // await browser.close();
 
   return products;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-async function daraz(query) {
-  const browser = await puppeteer.launch({
-    headless: false,
-    ignoreDefaultArgs: ["--disable-extentions"],
-    args: ["--no-sandbox"],
-  });
-
+async function daraz(query, browser) {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
 
@@ -121,8 +121,8 @@ async function daraz(query) {
   await page.goto(url);
 
   // waiting for search bar to load
-  await page.waitForSelector("#q");
-  await page.type("#q", query);
+  await page.waitForSelector(".search-box__input--O34g");
+  await page.type(".search-box__input--O34g", query);
 
   //waiting for the search button to show up
   await page.waitForSelector(".search-box__search--2fC5");
@@ -147,20 +147,14 @@ async function daraz(query) {
     products.push({ name, price, orignalprice, image, link, site });
   });
 
-  await browser.close();
+  // await browser.close();
 
   return products;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-async function ishopping(query) {
-  const browser = await puppeteer.launch({
-    headless: false,
-    ignoreDefaultArgs: ["--disable-extentions"],
-    args: ["--no-sandbox"],
-  });
-
+async function ishopping(query, browser) {
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
 
@@ -205,6 +199,6 @@ async function ishopping(query) {
   });
   //   console.log(JSON.stringify(products, null, 2));
 
-  await browser.close();
+  // await browser.close();
   return products;
 }
