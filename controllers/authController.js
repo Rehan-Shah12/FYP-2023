@@ -1,5 +1,6 @@
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 import userModel from "../models/userModel.js";
+import orderModel from "../models/orderModel.js";
 import JWT from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
@@ -255,6 +256,24 @@ export const updateProfileController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error while Update profile",
+      error,
+    });
+  }
+};
+
+// Orders
+export const getOrdersController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({ buyer: req.user._id })
+      .populate("products", "-photo")
+      .populate("buyer", "fname");
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while getting Orders for User",
       error,
     });
   }

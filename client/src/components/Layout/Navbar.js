@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="d-flex align-items-center justify-content-center category">
           <span>
             <div
-              class="dropdown  "
+              className="dropdown  "
               style={{
                 display: "flex",
                 justifyContent: "center",

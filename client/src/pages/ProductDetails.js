@@ -103,7 +103,7 @@ const ProductDetails = () => {
                 {product.quantity > 0 && (
                   <button
                     type="button"
-                    class="btn fw-bold mb-2"
+                    className="btn fw-bold mb-2"
                     style={{
                       backgroundColor: "green",
                       color: "white",
@@ -118,7 +118,7 @@ const ProductDetails = () => {
                 )}
                 {/* <button
                   type="button"
-                  class="btn fw-bold"
+                  className="btn fw-bold"
                   style={{
                     backgroundColor: "#e150f9",
                     color: "white",
