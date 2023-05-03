@@ -25,7 +25,15 @@ const SearchBar = () => {
   };
   return (
     <div className="border-bottom d-flex justify-content-between px-5 fs-5 align-items-center pt-2 pb-2">
-      <div>Logo</div>
+      <div>
+        {" "}
+        <img
+          onClick={() => navigate("/")}
+          src="/images/choice.jpg"
+          alt="user"
+          style={{ height: "70px" }}
+        />
+      </div>
       <div>
         <SearchInput />
       </div>

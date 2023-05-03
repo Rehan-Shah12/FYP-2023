@@ -25,6 +25,7 @@ import ProductDetails from "./pages/ProductDetails.js";
 import Categories from "./pages/Categories.js";
 import CategoryProduct from "./pages/CategoryProduct.js";
 import CartPage from "./pages/CartPage.js";
+import AdminOrders from "./pages/Admin/AdminOrders.js";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="admin/products" element={<Products />} />
           <Route path="admin/feedback" element={<Feedback />} />
           <Route path="admin/profile" element={<AdminProfile />} />
+          <Route path="admin/orders" element={<AdminOrders />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
