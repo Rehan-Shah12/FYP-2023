@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&display=swap");
+
 * {
   margin: 0px;
   padding: 0%;
@@ -30,7 +31,7 @@
 }
 .nav-link {
   --bs-nav-link-padding-x: 15px;
-  font-weight: bold;
+  font-weight: 600;
 }
 .navbar-nav .nav-link.active {
   color: #f477c2;
@@ -199,7 +200,7 @@
 }
 
 .home-page .card-price {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .home-page .card img:hover {
@@ -239,4 +240,21 @@
   font-size: 15px !important;
   border: 2px solid green;
   border-radius: 15px;
+}
+
+/* //////////////////////////////////////////////////////////////////    HomePage */
+
+.homepagefont {
+  font-weight: 800;
+  font-size: 3.7rem;
+  background: linear-gradient(
+    90.18deg,
+    #d97db4 -5.85%,
+    #834b6d 52.67%,
+    #000000 104.71%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* text-fill-color: transparent; */
 }
