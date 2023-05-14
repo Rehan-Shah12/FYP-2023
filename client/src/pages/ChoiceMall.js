@@ -189,6 +189,26 @@ const ChoiceMall = () => {
                       </div>
                       <div>
                         <MdOutlineFavoriteBorder
+                          onClick={async () => {
+                            try {
+                              const res = await axios.post(
+                                "/api/v1/wishlist/add-to-wishlist",
+                                {
+                                  productId: p._id,
+                                }
+                              );
+                              console.log(res);
+                              if (res && res.data.success) {
+                                toast.success(res.data && res.data.message);
+                                navigate("/login");
+                              } else {
+                                toast.success(res.data.message);
+                              }
+                            } catch (error) {
+                              console.log(error);
+                              toast.error("Something went wrong");
+                            }
+                          }}
                           size={25}
                           style={{ marginRight: "10px" }}
                         />

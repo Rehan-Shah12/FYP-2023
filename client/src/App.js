@@ -26,6 +26,7 @@ import Categories from "./pages/Categories.js";
 import CategoryProduct from "./pages/CategoryProduct.js";
 import CartPage from "./pages/CartPage.js";
 import AdminOrders from "./pages/Admin/AdminOrders.js";
+import Wishlist from "./pages/Wishlist.js";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/choice-mall" element={<ChoiceMall />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
