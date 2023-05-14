@@ -27,23 +27,23 @@ const SearchInput = () => {
     } catch (error) {
       console.log(error);
     }
-    try {
-      const { data } = await axios.get(
-        `/api/v1/product/search/${values.keyword}`
-      );
+    // try {
+    //   const { data } = await axios.get(
+    //     `/api/v1/product/search/${values.keyword}`
+    //   );
 
-      setValues({ ...values, results: data });
-      navigate("/search");
-    } catch (error) {
-      console.log(error);
-    }
-    try {
-      const { data } = await axios.get(`/api/v1/scraper/search/`);
-      // setScrapeValues(data);
-      navigate("/search", { state: { data } });
-    } catch (error) {
-      console.log(error);
-    }
+    //   setValues({ ...values, results: data });
+    //   navigate("/search");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // try {
+    //   const { data } = await axios.get(`/api/v1/scraper/search/`);
+    //   // setScrapeValues(data);
+    //   navigate("/search", { state: { data } });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

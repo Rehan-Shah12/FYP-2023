@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Layout from "../../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
 
 const Register = () => {
   const [fname, setFirstName] = useState("");
@@ -18,6 +20,31 @@ const Register = () => {
   const [postcode, setPostal] = useState("");
 
   const navigate = useNavigate();
+
+  const responseGoogle = async (response) => {
+    if (response && response.error === "popup_closed_by_user") {
+      console.log("Popup closed by user");
+    } else {
+      try {
+        const res = await axios.post("/api/v1/auth/register", {
+          fname: response.profileObj.givenName,
+          lname: response.profileObj.familyName,
+          email: response.profileObj.email,
+          password: response.profileObj.googleId,
+        });
+        console.log(res);
+        if (res && res.data.success) {
+          toast.success(res.data && res.data.message);
+          navigate("/login");
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      }
+    }
+  };
 
   // form function
   const handleSubmit = async (e) => {
@@ -48,6 +75,17 @@ const Register = () => {
       toast.error("Something went wrong");
     }
   };
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId:
+          "15009738640-lid4cd3n7vgrse7a6m2s5u9r4deg85o3.apps.googleusercontent.com",
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
+  }, []);
 
   return (
     <Layout title="Signup Here!">
@@ -225,6 +263,16 @@ const Register = () => {
             </div>
           </div>
           <div className="d-flex submit-button justify-content-center align-item-center">
+            <div className="mb-3 mx-6">
+              <GoogleLogin
+                className="rounded"
+                clientId="15009738640-lid4cd3n7vgrse7a6m2s5u9r4deg85o3.apps.googleusercontent.com"
+                buttonText="Sign up with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+            </div>
             <div className="mb-3 mx-6">
               <button type="submit" className="btn submit">
                 Register
