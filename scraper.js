@@ -31,11 +31,20 @@ app.post("/scrape-search", async (req, res) => {
   await browser.close();
   console.timeEnd("scrape-search");
 
-  const searchResults = [
-    ...darazProducts,
-    ...eloProducts,
-    ...ishoppingProducts,
-  ];
+  const searchResults = [];
+
+  if (darazProducts.length > 0) {
+    searchResults.push(...darazProducts);
+  }
+
+  if (eloProducts.length > 0) {
+    searchResults.push(...eloProducts);
+  }
+
+  if (ishoppingProducts.length > 0) {
+    searchResults.push(...ishoppingProducts);
+  }
+
   console.timeEnd("scrape-search");
   // console.log("searchResult:", searchResults);
 
@@ -57,7 +66,7 @@ async function elo(query, browser) {
     console.time("elo");
 
     const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(0);
+    page.setDefaultNavigationTimeout(1800000); // Timeout set to 1 minute
 
     const override = Object.assign(page.viewport(), { width: 1366 });
     await page.setViewport(override);
@@ -97,7 +106,8 @@ async function elo(query, browser) {
     console.timeEnd("elo");
     return products;
   } catch (error) {
-    console.log("Navigation Error: ", error);
+    console.log("Elo Error: ", error);
+    return [];
   }
 }
 
@@ -108,7 +118,7 @@ async function daraz(query, browser) {
     console.log("Daraz started");
     console.time("Daraz");
     const page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(0);
+    page.setDefaultNavigationTimeout(1800000); // Timeout set to 1 minute
 
     // Overrides the heights property
     let override = Object.assign(page.viewport(), { width: 1366 });
@@ -145,7 +155,8 @@ async function daraz(query, browser) {
 
     return products;
   } catch (error) {
-    console.log("Navigation Error: ", error);
+    console.log("Daraz Error: ", error);
+    return [];
   }
 }
 
@@ -156,7 +167,7 @@ async function ishopping(query, browser) {
     console.log("ishopping started");
     console.time("ishopping");
     const page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(0);
+    page.setDefaultNavigationTimeout(1800000); // Timeout set to 1 minute
 
     // Overrides the hieghts property
     const override = Object.assign(page.viewport(), { width: 1366 });
@@ -199,6 +210,7 @@ async function ishopping(query, browser) {
 
     return products;
   } catch (error) {
-    console.log("Navigation Error: ", error);
+    console.log("Ishopping Error: ", error);
+    return [];
   }
 }
