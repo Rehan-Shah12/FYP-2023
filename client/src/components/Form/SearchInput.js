@@ -15,35 +15,28 @@ const SearchInput = () => {
     e.preventDefault();
 
     try {
-      // setSearching(true); // Start search operation
       const key = values.keyword;
-      // console.log(key);
-      const { data } = await axios.post("/api/v1/scraper/scrape-search/", {
+
+      const scrapeRequest = axios.post("/api/v1/scraper/scrape-search/", {
         query: key,
       });
-      // setSearching(false); // Stop search operation
+
+      const productsRequest = axios.get(`/api/v1/product/search/${key}`);
+
+      const [scrapeResponse, productsResponse] = await Promise.all([
+        scrapeRequest,
+        productsRequest,
+      ]);
+
+      const data = {
+        scrapeData: scrapeResponse.data,
+        productsData: productsResponse.data,
+      };
 
       navigate("/search", { state: { data } });
     } catch (error) {
       console.log(error);
     }
-    // try {
-    //   const { data } = await axios.get(
-    //     `/api/v1/product/search/${values.keyword}`
-    //   );
-
-    //   setValues({ ...values, results: data });
-    //   navigate("/search");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // try {
-    //   const { data } = await axios.get(`/api/v1/scraper/search/`);
-    //   // setScrapeValues(data);
-    //   navigate("/search", { state: { data } });
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (

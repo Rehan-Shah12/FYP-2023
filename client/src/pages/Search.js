@@ -41,7 +41,9 @@ const Search = () => {
 
   useEffect(() => {
     if (location.state) {
-      setScrapeValues(location.state.data);
+      const { scrapeData, productsData } = location.state.data;
+      setScrapeValues(scrapeData);
+      setValues({ ...values, results: productsData });
     }
   }, [location.state]);
 
@@ -162,11 +164,16 @@ const Search = () => {
         </div>
         {/* Filters End */}
         <div className="text-center col-9">
-          <h1>Search Resuts</h1>
+          <h1 className="fw-bold opacity">Search Resuts</h1>
+          <h6>
+            {filteredProducts.length > 0
+              ? `Showing ${filteredProducts.length} Scraped Products`
+              : `Found ${scrapeValues.length} Scraped Products`}
+          </h6>
           <h6>
             {values.results.length < 1
               ? "No Products Found"
-              : `Found ${values.results.length}`}
+              : `Found ${values.results.length} CHOICE Products`}
           </h6>
           <div className="d-flex flex-wrap mt-4">
             {values.results.map((p) => (
