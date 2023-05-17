@@ -7,7 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import { SearchProvider } from "./context/search";
 import { CartProvider } from "./context/cart";
+import Kommunicate from "@kommunicate/kommunicate-chatbot-plugin";
 import "antd/dist/reset.css";
+
+Kommunicate.init("2a5a8de92a8a443c2d31b7760473301a9");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

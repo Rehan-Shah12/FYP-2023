@@ -7,6 +7,7 @@ import { BsFillCartFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cart";
+import KommunicateChat from "../chat";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,6 @@ const HomePage = () => {
   return (
     <Layout>
       <div className="container mt-3  ">
-        {" "}
         {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
         <div className="row d-flex justify-content-center align-items-center">
           <div className="col-6  homepagefont p-2">
@@ -188,6 +188,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <KommunicateChat />
     </Layout>
   );
 };
