@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useCart } from "../context/cart";
+import { Audio } from "react-loader-spinner";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
@@ -134,6 +135,15 @@ const Search = () => {
                 </Checkbox>
               ))}
           </div>
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="green"
+            ariaLabel="loading"
+            wrapperStyle
+            wrapperClass
+          />
           {/* price filter */}
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
