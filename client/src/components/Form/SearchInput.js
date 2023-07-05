@@ -6,11 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
   const [values, setValues] = useSearch();
-  // const [scrapeValues, setScrapeValues] = useState([]);
-  // console.log(scrapeValues);
-  // const [searching, setSearching] = useState(false); // New state variable to track search operation
-
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,35 +37,22 @@ const SearchInput = () => {
   };
 
   return (
-    <div>
-      {" "}
+    <div className="mt-2 pb-0">
       <form className="d-flex w-100" role="search" onSubmit={handleSubmit}>
-        {" "}
-        <div className="input-group mb-3 " style={{ marginTop: "16px" }}>
+        <div className="input-group">
           <input
             type="text"
-            className="form-control"
+            className="form-control form-control-lg  search-bar"
             placeholder="Search Here"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
             value={values.keyword}
             onChange={(e) => setValues({ ...values, keyword: e.target.value })}
-            style={{
-              borderRight: "none",
-              borderTopLeftRadius: "20px",
-              borderBottomLeftRadius: "20px",
-              width: "430px",
-            }}
           />
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-secondary btn-lg  search-button"
             type="submit"
-            style={{
-              border: "1px solid rgba(129, 129, 126, 0.2)",
-              borderLeft: "none",
-              borderTopRightRadius: "20px",
-              borderBottomRightRadius: "20px",
-            }}
+            id="button-addon2"
           >
             <BsSearch />
           </button>

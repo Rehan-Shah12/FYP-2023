@@ -11,6 +11,11 @@ const wishlistSchema = new mongoose.Schema({
       ref: "Products",
     },
   ],
+  scrapeProducts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
 });
 
 export default mongoose.model("Wishlist", wishlistSchema);

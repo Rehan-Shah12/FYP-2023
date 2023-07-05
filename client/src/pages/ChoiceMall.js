@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useCart } from "../context/cart";
@@ -48,6 +48,15 @@ const ChoiceMall = () => {
       setLoading(false);
       console.log(error);
     }
+  };
+  const handleAddToCart = (product) => {
+    const cartItem = { ...product, quantity: 1 };
+    setCart((prevCart) => {
+      const newCart = [...prevCart, cartItem];
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      return newCart;
+    });
+    toast.success("Item added to Cart");
   };
 
   //getTOtal COunt
@@ -107,6 +116,7 @@ const ChoiceMall = () => {
       console.log(error);
     }
   };
+
   return (
     <Layout title={"ChoiceMall"}>
       <div className="container-fluid row mt-3 home-page">
@@ -188,42 +198,39 @@ const ChoiceMall = () => {
                         CHOICE
                       </div>
                       <div>
-                        <MdOutlineFavoriteBorder
-                          onClick={async () => {
-                            try {
-                              const res = await axios.post(
-                                "/api/v1/wishlist/add-to-wishlist",
-                                {
-                                  productId: p._id,
+                        <Link style={{ color: "black" }}>
+                          <MdOutlineFavoriteBorder
+                            onClick={async () => {
+                              try {
+                                const res = await axios.post(
+                                  "/api/v1/wishlist/add-to-wishlist",
+                                  {
+                                    productId: p._id,
+                                  }
+                                );
+                                console.log(res);
+                                if (res && res.data.success) {
+                                  toast.success(res.data && res.data.message);
+                                  navigate("/login");
+                                } else {
+                                  toast.success(res.data.message);
                                 }
-                              );
-                              console.log(res);
-                              if (res && res.data.success) {
-                                toast.success(res.data && res.data.message);
-                                navigate("/login");
-                              } else {
-                                toast.success(res.data.message);
+                              } catch (error) {
+                                console.log(error);
+                                toast.error("Something went wrong");
                               }
-                            } catch (error) {
-                              console.log(error);
-                              toast.error("Something went wrong");
-                            }
-                          }}
-                          size={25}
-                          style={{ marginRight: "10px" }}
-                        />
+                            }}
+                            size={25}
+                            style={{ marginRight: "10px" }}
+                          />
+                        </Link>
 
-                        <BsFillCartFill
-                          size={25}
-                          onClick={() => {
-                            setCart([...cart, p]);
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify([...cart, p])
-                            );
-                            toast.success("Item added to Cart");
-                          }}
-                        />
+                        <Link style={{ color: "black" }}>
+                          <BsFillCartFill
+                            size={25}
+                            onClick={() => handleAddToCart(p)}
+                          />
+                        </Link>
                       </div>
                     </div>
                   </div>

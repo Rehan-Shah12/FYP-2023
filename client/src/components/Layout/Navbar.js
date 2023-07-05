@@ -35,11 +35,11 @@ const Navbar = () => {
               {/* {console.log("Hello", categories)} */}
 
               <ul className="dropdown-menu">
-                <li>
+                {/* <li>
                   <Link className="dropdown-item" to={`/categories`}>
                     All Categories
                   </Link>
-                </li>
+                </li> */}
                 {categories.map((c) => {
                   return (
                     <li>

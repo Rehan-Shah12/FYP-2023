@@ -25,7 +25,7 @@ class KommunicateChat extends Component {
       <div>
         {(function(d, m) {
           var kommunicateSettings = {
-            appId: "2a5a8de92a8a443c2d31b7760473301a9",
+            appId: "28930a92e1206d3d7f60b50cf800362c1",
             popupWidget: true,
             automaticChatOpenOnNavigation: true,
           };

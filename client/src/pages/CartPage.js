@@ -7,6 +7,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { updateProductStock } from "../services/productService";
+// import productModel from "../../../models/productModel";
 
 const CartPage = () => {
   const [cart, setCart] = useCart();
@@ -33,7 +35,7 @@ const CartPage = () => {
     try {
       let total = 0;
       cart.map((item) => {
-        total = total + item.price;
+        total = total + item.price * item.quantity;
       });
       return total.toLocaleString("en-PK", {
         style: "currency",
@@ -43,6 +45,20 @@ const CartPage = () => {
       console.log(error);
     }
   };
+
+  // const updateProductStock = async (cart) => {
+  //   try {
+  //     for (const item of cart) {
+  //       const product = await productModel.findById(item.productId);
+  //       if (product) {
+  //         product.quantity -= item.quantity; // Deduct the quantity
+  //         await product.save();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // Get Payment Getway Token:
 
@@ -70,7 +86,8 @@ const CartPage = () => {
       });
       setLoading(false);
       localStorage.removeItem("cart");
-      setCart([]);
+      setCart([]); // Clear the cart
+      await updateProductStock(data.cart); // Deduct the quantity from stock
       navigate("/dashboard/user/order-history");
       toast.success("Payment Completed Successfully ");
     } catch (error) {
@@ -131,7 +148,7 @@ const CartPage = () => {
                   onClick={() => navigate(`/product/${p.slug}`)}
                 >
                   <h5 className="card-title fw-bold">{p.name}</h5>
-                  <p className="card-text ">
+                  <p className="card-text">
                     {p.description.substring(0, 60)}...
                   </p>
                   <h5 className="card-title card-price fw-bold">
@@ -140,6 +157,8 @@ const CartPage = () => {
                       currency: "PKR",
                     })}
                   </h5>
+                  <p className="card-text">Quantity: {p.quantity}</p>{" "}
+                  {/* Added quantity */}
                 </div>
                 <div className="col-md-2 cart-remove-btn d-flex justify-content-center align-items-center">
                   <div onClick={() => removeCartItem(p._id)}>

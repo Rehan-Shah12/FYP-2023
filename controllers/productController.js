@@ -176,6 +176,7 @@ export const updateProductController = async (req, res) => {
       products.photo.data = fs.readFileSync(photo.path);
       products.photo.contentType = photo.type;
     }
+    products.quantity = quantity; // Update the quantity
     await products.save();
     res.status(201).send({
       success: true,

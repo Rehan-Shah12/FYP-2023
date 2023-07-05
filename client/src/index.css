@@ -152,6 +152,16 @@
 
 /*/////////////////////////////////////////////////////////////////////     Search Bar*/
 
+@media (min-width: 273px) {
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/*/////////////////////////////////////////////////////////////////////     HomePage*/
+
 .btnforauth:hover {
   background-color: #e150f9;
   color: white;
@@ -335,4 +345,19 @@
     margin: 0;
     padding: 2rem;
   }
+}
+
+.zero-padding {
+  margin: 0;
+  padding: 0;
+}
+
+.search-button {
+  border-top-right-radius: 300px;
+  border-bottom-right-radius: 300px;
+}
+
+.search-bar {
+  border-top-left-radius: 300px;
+  border-bottom-left-radius: 300px;
 }

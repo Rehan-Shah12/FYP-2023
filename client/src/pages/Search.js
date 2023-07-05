@@ -7,8 +7,8 @@ import { useLocation } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useCart } from "../context/cart";
-import { Audio } from "react-loader-spinner";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 const Search = () => {
@@ -135,15 +135,7 @@ const Search = () => {
                 </Checkbox>
               ))}
           </div>
-          <Audio
-            height="80"
-            width="80"
-            radius="9"
-            color="green"
-            ariaLabel="loading"
-            wrapperStyle
-            wrapperClass
-          />
+
           {/* price filter */}
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
@@ -182,7 +174,7 @@ const Search = () => {
           </h6>
           <h6>
             {values.results.length < 1
-              ? "No Products Found"
+              ? "No CHOICE Products Found"
               : `Found ${values.results.length} CHOICE Products`}
           </h6>
           <div className="d-flex flex-wrap mt-4">
@@ -201,9 +193,9 @@ const Search = () => {
                   >
                     <h5 className="card-title text-start">{p.name}</h5>
                     <h5 className="card-title card-price">
-                      {p.price.toLocaleString("en-US", {
+                      {p.price.toLocaleString("en-PK", {
                         style: "currency",
-                        currency: "USD",
+                        currency: "PKR",
                       })}
                     </h5>
                   </div>
@@ -257,9 +249,9 @@ const Search = () => {
                           {p.name.substring(0, 30)}...
                         </h5>
                         <h5 className="card-title card-price">
-                          {p.price.toLocaleString("en-US", {
+                          {p.price.toLocaleString("en-PK", {
                             style: "currency",
-                            currency: "USD",
+                            currency: "PKR",
                           })}
                         </h5>
                       </div>
@@ -281,6 +273,26 @@ const Search = () => {
                           <MdOutlineFavoriteBorder
                             size={25}
                             style={{ marginRight: "10px" }}
+                            onClick={async () => {
+                              try {
+                                const res = await axios.post(
+                                  "/api/v1/wishlist/add-to-wishlist",
+                                  {
+                                    productId: p._id,
+                                  }
+                                );
+                                console.log(res);
+                                if (res && res.data.success) {
+                                  toast.success(res.data && res.data.message);
+                                  navigate("/login");
+                                } else {
+                                  toast.success(res.data.message);
+                                }
+                              } catch (error) {
+                                console.log(error);
+                                toast.error("Something went wrong");
+                              }
+                            }}
                           />
 
                           {/* //     onClick={() => {
@@ -300,6 +312,7 @@ const Search = () => {
                 ))
               : scrapeValues.map((p) => (
                   <div className="card m-2" style={{ width: "18rem" }}>
+                    {console.log(p._id)}
                     <img src={p.image} className="card-img-top" alt={p.name} />
                     <div className="card-body">
                       <div className="card-name-price">
@@ -331,6 +344,26 @@ const Search = () => {
                           <MdOutlineFavoriteBorder
                             size={25}
                             style={{ marginRight: "10px" }}
+                            onClick={async () => {
+                              try {
+                                const res = await axios.post(
+                                  "/api/v1/wishlist/add-to-wishlist",
+                                  {
+                                    productId: p.id,
+                                  }
+                                );
+                                console.log(res);
+                                if (res && res.data.success) {
+                                  toast.success(res.data && res.data.message);
+                                  navigate("/login");
+                                } else {
+                                  toast.success(res.data.message);
+                                }
+                              } catch (error) {
+                                console.log(error);
+                                toast.error("Something went wrong");
+                              }
+                            }}
                           />
 
                           {/* //     onClick={() => {

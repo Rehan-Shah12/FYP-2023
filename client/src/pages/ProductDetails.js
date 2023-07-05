@@ -5,12 +5,16 @@ import { useParams } from "react-router-dom";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { BsFillCartFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { Button, Space } from "antd";
+import { useCart } from "../context/cart";
+import { toast } from "react-hot-toast";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
-
   const params = useParams();
   const [product, setProduct] = useState({});
+  const [cart, setCart] = useCart();
+  const [count, setCount] = useState(0);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
@@ -25,7 +29,6 @@ const ProductDetails = () => {
       );
       setProduct(data.product);
       getSimilarProduct(data.product._id, data.product.category._id);
-      console.log("Hello");
     } catch (error) {
       console.log(error);
     }
@@ -42,26 +45,43 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
+  const handleIncrement = () => {
+    if (count < product.quantity) {
+      setCount(count + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (product.quantity > 0) {
+      const cartItem = { ...product, quantity: count };
+      setCart([...cart, cartItem]);
+      localStorage.setItem("cart", JSON.stringify([...cart, cartItem]));
+      toast.success("Item added to Cart");
+    }
+  };
+
   return (
     <Layout>
       <div className="container-fluid">
-        {" "}
         <div
           className="row"
           style={{ marginTop: "100px", marginInline: "200px" }}
         >
           <div className="col-md-5">
-            {" "}
             <img
               src={`/api/v1/product/product-photo/${product._id}`}
               className="card-img-top"
               alt={product.name}
               height={"100%"}
               width={"100%"}
-              style={{
-                objectFit: "contain",
-                borderRadius: "30px",
-              }}
+              style={{ objectFit: "contain", borderRadius: "30px" }}
             />
           </div>
           <div className="col-md-6" style={{ opacity: "0.87" }}>
@@ -72,10 +92,8 @@ const ProductDetails = () => {
               CHOICE
             </h5>
             <div className="d-flex justify-content-between">
-              {" "}
               <div>
                 <p>As Low As:</p>
-
                 {Object.keys(product).length > 0 && (
                   <>
                     <p className="fw-bold" style={{ fontSize: "1.5rem" }}>
@@ -85,7 +103,6 @@ const ProductDetails = () => {
                       })}
                     </p>
                     <sub>
-                      {" "}
                       {product.oldPrice > 0 && (
                         <p style={{ textDecoration: "line-through" }}>
                           {product.oldPrice.toLocaleString("en-PK", {
@@ -95,12 +112,16 @@ const ProductDetails = () => {
                         </p>
                       )}
                     </sub>
+                    <Space wrap>
+                      <Button onClick={handleDecrement}>-</Button>
+                      <Button>{count}</Button>
+                      <Button onClick={handleIncrement}>+</Button>
+                    </Space>
                   </>
                 )}
               </div>
-              <div className="d-flex flex-column justify-content-center align-items-center ">
-                {" "}
-                {product.quantity > 0 && (
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                {product.quantity > 0 ? (
                   <button
                     type="button"
                     className="btn fw-bold mb-2"
@@ -114,34 +135,6 @@ const ProductDetails = () => {
                     }}
                   >
                     In Stock
-                  </button>
-                )}
-                {/* <button
-                  type="button"
-                  className="btn fw-bold"
-                  style={{
-                    backgroundColor: "#e150f9",
-                    color: "white",
-                    borderRadius: "30px",
-                    padding: "18px",
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  Add To Cart
-                </button> */}
-                {product.quantity > 0 ? (
-                  <button
-                    type="button"
-                    className="btn fw-bold"
-                    style={{
-                      backgroundColor: "#e150f9",
-                      color: "white",
-                      borderRadius: "30px",
-                      padding: "18px",
-                      fontSize: "1.5rem",
-                    }}
-                  >
-                    Add To Cart
                   </button>
                 ) : (
                   <button
@@ -159,24 +152,41 @@ const ProductDetails = () => {
                     Not Available
                   </button>
                 )}
+                <button
+                  type="button"
+                  className="btn fw-bold"
+                  onClick={handleAddToCart}
+                  style={{
+                    backgroundColor: "#e150f9",
+                    color: "white",
+                    borderRadius: "30px",
+                    padding: "18px",
+                    fontSize: "1.5rem",
+                  }}
+                  disabled={count === 0}
+                >
+                  Add To Cart
+                </button>
               </div>
             </div>
           </div>
         </div>
-        {relatedProducts != 0 && (
+        {relatedProducts.length > 0 && (
           <div
             className="row"
             style={{ marginTop: "80px", marginBottom: "80px" }}
           >
-            <h2 className="fw-bold " style={{ opacity: "0.87" }}>
-              {" "}
+            <h2 className="fw-bold" style={{ opacity: "0.87" }}>
               Similar Products
             </h2>
             <div className="home-page">
-              {" "}
               <div className="d-flex flex-wrap mt-4">
                 {relatedProducts.map((p) => (
-                  <div className="card m-2" style={{ width: "18rem" }}>
+                  <div
+                    className="card m-2"
+                    style={{ width: "18rem" }}
+                    key={p._id}
+                  >
                     <img
                       src={`/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
@@ -201,7 +211,7 @@ const ProductDetails = () => {
                         onClick={() => navigate(`/product/${p.slug}`)}
                       >
                         {p.description.substring(0, 20)}...
-                      </p>{" "}
+                      </p>
                       <div className="card-name-price">
                         <div
                           style={{
@@ -209,7 +219,7 @@ const ProductDetails = () => {
                             backgroundColor: "#e150f9",
                             color: "white",
                             textAlign: "center",
-                            padding: "3px 6px ",
+                            padding: "3px 6px",
                             borderRadius: "20px",
                           }}
                         >
@@ -220,7 +230,6 @@ const ProductDetails = () => {
                             size={25}
                             style={{ marginRight: "10px" }}
                           />
-
                           <BsFillCartFill size={25} />
                         </div>
                       </div>
