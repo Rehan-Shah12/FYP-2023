@@ -76,33 +76,34 @@ async function elo(query, browser) {
     const url = `https://www.exportleftovers.com/search?q=${query}`;
     await page.goto(url);
 
-    await page.waitForSelector("div.search__item.container.has-padding-bottom");
+    await page.waitForSelector("div.product-wrap");
 
     const html = await page.content();
     const $ = load(html);
 
     const products = [];
 
-    $("div.search__item.container.has-padding-bottom:lt(10)").each(
-      (index, element) => {
-        const name = $(element).find("h3.search-result__title > a").text();
-        const price = $(element).find("span.price > span.money").text().trim();
-        const orignalprice = $(element)
-          .find("span.compare-at-price > span.money")
-          .text()
-          .trim();
-        const image = $(element)
-          .find("div.image-element__wrap > img")
-          .attr("data-src");
-        const desc = $(element).find("div.has-padding-top > p").text().trim();
-        const halflink = $(element)
-          .find("h3.search-result__title > a")
-          .attr("href");
-        const link = "https://www.exportleftovers.com" + halflink;
-        const site = "Elo";
-        products.push({ name, price, orignalprice, image, desc, link, site });
-      }
-    );
+    $("div.product-wrap:lt(10)").each((index, element) => {
+      const name = $(element).find("a.product-thumbnail__title").text();
+      const price = $(element)
+        .find("span.product-thumbnail__price > span.money")
+        .text()
+        .trim();
+      const orignalprice = $(element)
+        .find("span.compare-at-price > span.money")
+        .text()
+        .trim();
+      const image = $(element)
+        .find("div.image-element__wrap > img")
+        .attr("data-src");
+      const desc = $(element).find("div.has-padding-top > p").text().trim();
+      const halflink = $(element)
+        .find("h3.search-result__title > a")
+        .attr("href");
+      const link = "https://www.exportleftovers.com" + halflink;
+      const site = "Elo";
+      products.push({ name, price, orignalprice, image, desc, link, site });
+    });
     console.timeEnd("elo");
     return products;
   } catch (error) {

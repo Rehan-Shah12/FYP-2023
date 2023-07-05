@@ -44,7 +44,7 @@ const HomePage = () => {
           <div className="col-6  homepagefont p-2">
             Search and Find your Products across Different E-commerce Sites
           </div>
-          <div className="col-6">
+          <div className="col-6 d-none d-md-block">
             {" "}
             <img
               src="/images/homepage.png"

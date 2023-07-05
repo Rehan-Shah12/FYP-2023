@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 const SearchInput = () => {
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const key = values.keyword;
+      setIsLoading(true); // Start the loader
 
       const scrapeRequest = axios.post("/api/v1/scraper/scrape-search/", {
         query: key,
@@ -30,9 +32,11 @@ const SearchInput = () => {
         productsData: productsResponse.data,
       };
 
+      setIsLoading(false); // Stop the loader
       navigate("/search", { state: { data } });
     } catch (error) {
       console.log(error);
+      setIsLoading(false); // Stop the loader on error
     }
   };
 
@@ -53,8 +57,15 @@ const SearchInput = () => {
             className="btn btn-outline-secondary btn-lg  search-button"
             type="submit"
             id="button-addon2"
+            disabled={isLoading} // Disable button during loading
           >
-            <BsSearch />
+            {isLoading ? (
+              <div className="spinner-border spinner-border-sm" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              <BsSearch />
+            )}
           </button>
         </div>
       </form>

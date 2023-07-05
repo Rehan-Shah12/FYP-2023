@@ -241,7 +241,11 @@ const Search = () => {
             ))}
             {filteredProducts.length > 0
               ? filteredProducts.map((p) => (
-                  <div className="card m-2" style={{ width: "18rem" }}>
+                  <div
+                    className="card m-2"
+                    style={{ width: "18rem" }}
+                    onClick={() => window.open(p.link)}
+                  >
                     <img src={p.image} className="card-img-top" alt={p.name} />
                     <div className="card-body">
                       <div className="card-name-price">
@@ -311,7 +315,11 @@ const Search = () => {
                   </div>
                 ))
               : scrapeValues.map((p) => (
-                  <div className="card m-2" style={{ width: "18rem" }}>
+                  <div
+                    className="card m-2"
+                    style={{ width: "18rem" }}
+                    onClick={() => window.open(p.link)}
+                  >
                     {console.log(p._id)}
                     <img src={p.image} className="card-img-top" alt={p.name} />
                     <div className="card-body">
@@ -374,8 +382,7 @@ const Search = () => {
                         //       );
                         //       toast.success("Item Added to cart");
                         //     }} */}
-
-                          <BsFillCartFill size={25} />
+                          {/* <BsFillCartFill size={25} /> */}
                         </div>
                       </div>
                     </div>

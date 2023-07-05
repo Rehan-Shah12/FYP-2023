@@ -38,8 +38,8 @@ const About = () => {
         </div>
         <div className="row mt-5">
           <div className="col-6 ">
-            <h2 className="fw-bold opacity text-center">About Us</h2>
-            <p className="text-center">Your Care Our Responsibility</p>
+            {/* <h2 className="fw-bold opacity text-center">About Us</h2>
+            <p className="text-center">Your Care Our Responsibility</p> */}
             <div className="text-start about">
               <div className="row">
                 <h4 className="fw-bold text-center opacity">Developers</h4>
@@ -48,31 +48,70 @@ const About = () => {
                   <hr style={{ width: "80%" }} />
                 </div>
 
-                <div className="col-6 d-flex justify-content-center align-items-center flex-column">
-                  <img
-                    src="/images/Rehan.jpg"
-                    className="aboutpp rounded-circle mb-3"
-                  />
-                  <h5 className="fw-bold text-center opacity">
-                    Syed Rehan Ali Shah
-                  </h5>
-                </div>
-                <div className="col-6 d-flex justify-content-center align-items-center flex-column">
-                  <img
-                    src="/images/Hamza.jpg"
-                    className="aboutpp rounded-circle mb-3"
-                  />
-                  <h5 className="fw-bold text-center opacity">
-                    Syed Hamza Imran
-                  </h5>
+                <div className="row">
+                  <div className="col-6 d-flex justify-content-center align-items-center flex-column">
+                    <img
+                      src="/images/Rehan.jpg"
+                      // className="aboutpp rounded-circle mb-3"
+                      className="aboutpp  rounded-circle mb-3"
+                    />
+                    <h5 className="fw-bold text-center opacity">
+                      Syed Rehan Ali Shah
+                    </h5>
+                    <sub>MERN Stack Developer</sub>
+                  </div>
+                  <div className="col-6 d-flex justify-content-center align-items-center flex-column">
+                    <img
+                      src="/images/Hamza.jpg"
+                      className="aboutpp  rounded-circle mb-3"
+                    />
+                    <h5 className="fw-bold text-center opacity">
+                      Syed Hamza Imran
+                    </h5>
+                    <sub>Data Scientist</sub>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-6 ">
+            <div className="text-start about">
+              <div className="row">
+                <h4 className="fw-bold text-center opacity">Supervisors</h4>
+                <div className="d-flex justify-content-center mb-4">
+                  {" "}
+                  <hr style={{ width: "80%" }} />
+                </div>
+
+                <div className="row">
+                  <div className="col-6 d-flex justify-content-center align-items-center flex-column">
+                    <img
+                      src="/images/AK.jpg"
+                      className="aboutpp  rounded-circle mb-3"
+                    />
+                    <h5 className="fw-bold text-center opacity">
+                      Mr. Abdul Karim Shahid
+                    </h5>
+                    <sub>Supervisor</sub>
+                  </div>
+                  <div className="col-6 d-flex justify-content-center align-items-center flex-column">
+                    <img
+                      src="/images/MM.jpg"
+                      className="aboutpp  rounded-circle mb-3"
+                    />
+                    <h5 className="fw-bold text-center opacity">
+                      Mr. Mohsin Mehdi
+                    </h5>
+                    <sub>Co-Supervisor</sub>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="col-6">
             <h2 className="fw-bold opacity text-center">FAQs</h2>
             <p className="text-center">Popular Questions</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </Layout>
