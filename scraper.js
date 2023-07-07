@@ -66,8 +66,7 @@ async function elo(query, browser) {
     console.time("elo");
 
     const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(60000); // Timeout set to 1 minute
-
+    page.setDefaultNavigationTimeout(0);
     const override = Object.assign(page.viewport(), { width: 1366 });
     await page.setViewport(override);
 
@@ -119,7 +118,7 @@ async function daraz(query, browser) {
     console.log("Daraz started");
     console.time("Daraz");
     const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(60000); // Timeout set to 1 minute
+    // page.setDefaultNavigationTimeout(0); // Timeout set to 1 minute
 
     // Overrides the heights property
     let override = Object.assign(page.viewport(), { width: 1366 });
@@ -168,7 +167,7 @@ async function ishopping(query, browser) {
     console.log("ishopping started");
     console.time("ishopping");
     const page = await browser.newPage();
-    page.setDefaultNavigationTimeout(60000); // Timeout set to 1 minute
+    // page.setDefaultNavigationTimeout(0); // Timeout set to 1 minute
 
     // Overrides the hieghts property
     const override = Object.assign(page.viewport(), { width: 1366 });

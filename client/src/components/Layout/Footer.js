@@ -9,14 +9,13 @@ const Footer = () => {
           <div className="col ">
             <span className="fs-1 fw-bolder">CHOICE</span>
             <p className="text-start">
-              Address Lorem ipsum dolor sit amet consectetur adipiscing elit Ut
-              et massa
+              Your One-Stop Shop for Trusted Products, Sites, and Convenience
             </p>
             <p>
               <strong>Call us:</strong> +92 090078601
             </p>
             <p>
-              <strong>Email:</strong> example@gmail.com
+              <strong>Email:</strong> choice@gmail.com
             </p>
           </div>
           <div className="col mt-2">
@@ -27,9 +26,9 @@ const Footer = () => {
               <Link to="/about" className="nolinkcolor pb-4 ">
                 About us
               </Link>
-              <Link to="/about" className="nolinkcolor pb-4 ">
+              {/* <Link to="/about" className="nolinkcolor pb-4 ">
                 FAQ
-              </Link>
+              </Link> */}
               <Link to="/about" className="nolinkcolor pb-4 ">
                 Contact us
               </Link>
@@ -40,10 +39,13 @@ const Footer = () => {
               Account
             </span>
             <span className="footer">
-              <Link to="/myprofile" className="nolinkcolor pb-4 ">
+              <Link to="/dashboard/user/profile" className="nolinkcolor pb-4 ">
                 My Profile
               </Link>
-              <Link to="/orderhistory" className="nolinkcolor pb-4 ">
+              <Link
+                to="/dashboard/user/order-history"
+                className="nolinkcolor pb-4 "
+              >
                 Order History
               </Link>
               <Link to="/wishlist" className="nolinkcolor pb-4 ">
@@ -51,7 +53,7 @@ const Footer = () => {
               </Link>
             </span>
           </div>
-          <div className="col mt-2">
+          {/* <div className="col mt-2">
             <span className="fs-3 fw-bolder ">Newsletter</span>
             <p className="pt-4">
               Get instant updates on your e-mail related to our new products
@@ -68,7 +70,7 @@ const Footer = () => {
                 aria-describedby="basic-addon1"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -8,6 +8,8 @@ import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { updateProductStock } from "../services/productService";
+import { Button, Space } from "antd";
+
 // import productModel from "../../../models/productModel";
 
 const CartPage = () => {
@@ -96,6 +98,17 @@ const CartPage = () => {
     }
   };
 
+  const handleQuantityChange = (productId, newQuantity) => {
+    const updatedCart = cart.map((item) => {
+      if (item._id === productId) {
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
   return (
     <Layout>
       <div className="container">
@@ -129,10 +142,7 @@ const CartPage = () => {
                 key={p._id}
                 style={{ borderRadius: "20px" }}
               >
-                <div
-                  className="col-md-4"
-                  onClick={() => navigate(`/product/${p.slug}`)}
-                >
+                <div className="col-md-4">
                   <img
                     src={`/api/v1/product/product-photo/${p._id}`}
                     className="card-img-top"
@@ -140,12 +150,13 @@ const CartPage = () => {
                     width="100%"
                     height={"130px"}
                     style={{ objectFit: "contain" }}
+                    onClick={() => navigate(`/product/${p.slug}`)}
                   />
                 </div>
                 <div
                   className="col-md-6"
                   style={{ paddingTop: "15px" }}
-                  onClick={() => navigate(`/product/${p.slug}`)}
+                  // onClick={() => navigate(`/product/${p.slug}`)}
                 >
                   <h5 className="card-title fw-bold">{p.name}</h5>
                   <p className="card-text">
@@ -157,8 +168,27 @@ const CartPage = () => {
                       currency: "PKR",
                     })}
                   </h5>
-                  <p className="card-text">Quantity: {p.quantity}</p>{" "}
-                  {/* Added quantity */}
+                  <p className="card-text"> {}</p>{" "}
+                  <Space wrap className="mb-3">
+                    <Button
+                      onClick={() =>
+                        handleQuantityChange(p._id, p.quantity - 1)
+                      }
+                    >
+                      -
+                    </Button>
+                    <Button>
+                      <b className="opacity">Quantity: </b>
+                      {p.quantity}
+                    </Button>
+                    <Button
+                      onClick={() =>
+                        handleQuantityChange(p._id, p.quantity + 1)
+                      }
+                    >
+                      +
+                    </Button>
+                  </Space>
                 </div>
                 <div className="col-md-2 cart-remove-btn d-flex justify-content-center align-items-center">
                   <div onClick={() => removeCartItem(p._id)}>
